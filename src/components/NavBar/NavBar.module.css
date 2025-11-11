@@ -1,0 +1,15 @@
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.link {
+  color: var(--color-bg);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: var(--color-secondary);
+}

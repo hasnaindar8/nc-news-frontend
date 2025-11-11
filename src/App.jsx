@@ -1,5 +1,6 @@
+import AppRoutes from "./routes/AppRoutes.jsx";
 function App() {
-  return <h1>NC News</h1>;
+  return <AppRoutes />;
 }
 
 export default App;
