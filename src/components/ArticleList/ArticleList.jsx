@@ -4,29 +4,34 @@ import styles from "./ArticleList.module.css";
 import Loading from "../Loading/Loading.jsx";
 import Error from "../Error/Error.jsx";
 
-function ArticleList() {
+function ArticleList(props) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const { topic } = props;
 
   async function fetchArticles() {
     try {
-      const response = await fetch(
-        `https://nc-news-backend-02ex.onrender.com/api/articles`
-      );
+      let url = "https://nc-news-backend-02ex.onrender.com/api/articles";
+
+      if (topic) {
+        url += `?topic=${topic}`;
+      }
+
+      const response = await fetch(url);
       const data = await response.json();
       setArticles(data.articles);
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
       setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, [props]);
 
   if (isLoading) {
     return <Loading>Loading...</Loading>;

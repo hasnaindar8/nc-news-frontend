@@ -6,3 +6,11 @@
   justify-content: space-between;
   padding: 1rem 2rem;
 }
+
+.link {
+  color: var(--color-bg);
+}
+
+.link:hover {
+  color: var(--color-bg);
+}

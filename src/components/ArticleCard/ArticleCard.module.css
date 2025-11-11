@@ -43,10 +43,10 @@
   font-size: 0.75rem;
 }
 
-a{
+.link {
   color: var(--color-text);
 }
 
-a:hover {
+.link:hover {
   color: var(--color-muted);
 }

@@ -13,7 +13,7 @@ function ArticleCard({ article }) {
   } = article;
 
   return (
-    <Link to={`/articles/${article_id}`}>
+    <Link to={`/articles/${article_id}`} className={styles.link}>
       <article className={styles.card}>
         <header>
           <h2 className={styles.cardTitle}>{title}</h2>
@@ -31,7 +31,7 @@ function ArticleCard({ article }) {
 
         <footer className={styles.cardFooter}>
           <div className={styles.cardMeta}>
-            <span>{author}</span> |{" "}
+            <span>{author}</span>
             <time dateTime={created_at}>
               {new Date(created_at).toLocaleDateString()}
             </time>
