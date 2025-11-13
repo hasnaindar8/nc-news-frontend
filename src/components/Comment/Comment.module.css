@@ -1,13 +1,12 @@
-.commentList {
+.comment {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-  border-radius: 10px;
   max-width: 800px;
   margin: 1rem;
 }
 
-.commentList > h3 {
+.comment > h3 {
   font-size: 1.75rem;
   font-weight: 600;
   margin-bottom: 1rem;

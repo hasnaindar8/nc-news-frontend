@@ -1,0 +1,47 @@
+.commentForm {
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentForm > label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.commentForm > textarea {
+  border: 1px solid var(--color-text);
+  border-radius: 8px;
+  min-height: 15vh;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  resize: vertical;
+}
+
+.commentForm > textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.commentForm > button {
+  align-self: flex-end;
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.4rem;
+}
+
+.commentForm > button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}

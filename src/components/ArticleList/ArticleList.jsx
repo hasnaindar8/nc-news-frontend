@@ -17,7 +17,6 @@ function ArticleList(props) {
       if (topic) {
         url += `?topic=${topic}`;
       }
-
       const response = await fetch(url);
       const data = await response.json();
       setArticles(data.articles);
@@ -43,9 +42,10 @@ function ArticleList(props) {
 
   return (
     <section className={styles.grid}>
-      {articles.map((article) => (
-        <ArticleCard key={article.article_id} article={article} />
-      ))}
+      {articles &&
+        articles.map((article) => (
+          <ArticleCard key={article.article_id} article={article} />
+        ))}
     </section>
   );
 }

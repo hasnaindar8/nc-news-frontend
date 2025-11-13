@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./IndividualArticle.module.css";
 import Loading from "../Loading/Loading.jsx";
 import Error from "../Error/Error.jsx";
-import CommentsList from "../CommentsList/CommentsList.jsx";
+import Comment from "../Comment/Comment.jsx";
 
 function IndividualArticle({ articleId }) {
   const [article, setArticle] = useState(null);
@@ -36,9 +36,9 @@ function IndividualArticle({ articleId }) {
   }
 
   return (
-    <section>
-      {article && (
-        <>
+    <>
+      <section>
+        {article && (
           <article className={styles.article}>
             <header className={styles.articleHeader}>
               <h2 className={styles.title}>{article.title}</h2>
@@ -53,20 +53,17 @@ function IndividualArticle({ articleId }) {
             </figure>
             <p className={styles.articleBody}>{article.body}</p>
             <footer className={styles.articleFooter}>
-              <span>{article.author}</span>
-              <time dateTime={article.created_at}>
-                {new Date(article.created_at).toLocaleDateString()}
-              </time>
+              <span>Author: {article.author}</span>
               <span className="votes">Votes: {article.votes}</span>
-              <span className="comments">
-                Comments: {article.comment_count}
-              </span>
+              <time dateTime={article.created_at}>
+                Published at: {new Date(article.created_at).toLocaleDateString()}
+              </time>
             </footer>
           </article>
-          <CommentsList articleId={articleId} />
-        </>
-      )}
-    </section>
+        )}
+      </section>
+      <Comment articleId={articleId} />
+    </>
   );
 }
 export default IndividualArticle;
