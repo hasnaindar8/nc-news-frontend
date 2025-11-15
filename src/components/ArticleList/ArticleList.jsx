@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ArticleCard from "../ArticleCard/ArticleCard.jsx";
 import styles from "./ArticleList.module.css";
 import Loading from "../Loading/Loading.jsx";
-import Error from "../Error/Error.jsx";
+import Error from "../ErrorMessage/ErrorMessage.jsx";
 import ArticleFilter from "../ArticleFilter/ArticleFilter.jsx";
 import { useSearchParams } from "react-router";
 

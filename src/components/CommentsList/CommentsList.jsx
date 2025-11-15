@@ -1,5 +1,5 @@
 import Loading from "../Loading/Loading.jsx";
-import Error from "../Error/Error.jsx";
+import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import CommentCard from "../CommentCard/CommentCard.jsx";
 import { useUser } from "../../hooks/useUser.js";
 
@@ -11,7 +11,7 @@ function CommentsList({ comments, isLoading, isError, fetchComments }) {
   }
 
   if (isError) {
-    return <Error>Something went wrong</Error>;
+    return <ErrorMessage>Something went wrong</ErrorMessage>;
   }
 
   return (

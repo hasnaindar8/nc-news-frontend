@@ -1,12 +1,14 @@
+import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import styles from "./IndividualArticle.module.css";
 import Loading from "../Loading/Loading.jsx";
-import Error from "../Error/Error.jsx";
+import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import Comment from "../Comment/Comment.jsx";
 import { UserProvider } from "../../contexts/UserContext.jsx";
 
 function IndividualArticle({ articleId }) {
   const [article, setArticle] = useState(null);
+  const [votes, setVotes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -16,6 +18,7 @@ function IndividualArticle({ articleId }) {
       const response = await fetch(url);
       const data = await response.json();
       setArticle(data.article);
+      setVotes(data.article.votes);
     } catch (error) {
       console.log(error);
       setIsError(true);
@@ -28,12 +31,34 @@ function IndividualArticle({ articleId }) {
     fetchArticle();
   }, []);
 
+  const handleClick = async (isUp) => {
+    const incVote = isUp ? 1 : -1;
+    setVotes((prev) => prev + incVote);
+    try {
+      const url = `https://nc-news-backend-02ex.onrender.com/api/articles/${articleId}`;
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ inc_votes: incVote }),
+      });
+
+      const data = await response.json();
+      if (data.msg) {
+        throw new Error(data.msg);
+      }
+      setVotes(data.article.votes);
+    } catch (error) {
+      console.log(error.message);
+      setVotes((prev) => prev - incVote);
+    }
+  };
+
   if (isLoading) {
     return <Loading>Loading...</Loading>;
   }
 
   if (isError) {
-    return <Error>Something went wrong</Error>;
+    return <ErrorMessage>Something went wrong</ErrorMessage>;
   }
 
   return (
@@ -55,7 +80,23 @@ function IndividualArticle({ articleId }) {
             <p className={styles.articleBody}>{article.body}</p>
             <footer className={styles.articleFooter}>
               <span>Author: {article.author}</span>
-              <span className="votes">Votes: {article.votes}</span>
+              <span>
+                <button
+                  onClick={() => {
+                    handleClick(true);
+                  }}
+                >
+                  <BiUpvote />
+                </button>
+                <span className="votes">{votes} votes</span>
+                <button
+                  onClick={() => {
+                    handleClick(false);
+                  }}
+                >
+                  <BiDownvote />
+                </button>
+              </span>
               <time dateTime={article.created_at}>
                 Published at:{" "}
                 {new Date(article.created_at).toLocaleDateString()}

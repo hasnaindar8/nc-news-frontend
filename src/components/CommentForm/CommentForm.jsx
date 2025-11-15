@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Error from "../Error/Error.jsx";
+import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import styles from "./CommentForm.module.css";
 import { useUser } from "../../hooks/useUser.js";
 
@@ -32,7 +32,7 @@ function CommentForm({ articleId, fetchComments }) {
 
       const data = await response.json();
       if (data.msg) {
-        throw new Error(data.msg);
+        throw new ErrorMessage(data.msg);
       }
       fetchComments();
     } catch (error) {
@@ -44,7 +44,7 @@ function CommentForm({ articleId, fetchComments }) {
   }
 
   if (isError) {
-    return <Error>Something went wrong</Error>;
+    return <ErrorMessage>Something went wrong</ErrorMessage>;
   }
 
   return (
