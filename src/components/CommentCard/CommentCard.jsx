@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./CommentCard.module.css";
 
-function CommentCard({ comment, fetchComments }) {
+function CommentCard({ comment, fetchComments, user }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const { comment_id, body, votes, author, created_at } = comment;
@@ -28,8 +28,7 @@ function CommentCard({ comment, fetchComments }) {
     <article className={styles.commentCard}>
       <header className={styles.commentHeader}>
         <h6 className={styles.commentAuthor}>{author}</h6>
-        {/* TODO: replace with current logged in user */}
-        {author === "cooljmessy" ? (
+        {author === user.username ? (
           <button
             className={styles.commentDelete}
             onClick={handleClick}

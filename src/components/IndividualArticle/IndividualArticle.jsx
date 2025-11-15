@@ -3,6 +3,7 @@ import styles from "./IndividualArticle.module.css";
 import Loading from "../Loading/Loading.jsx";
 import Error from "../Error/Error.jsx";
 import Comment from "../Comment/Comment.jsx";
+import { UserProvider } from "../../contexts/UserContext.jsx";
 
 function IndividualArticle({ articleId }) {
   const [article, setArticle] = useState(null);
@@ -56,13 +57,16 @@ function IndividualArticle({ articleId }) {
               <span>Author: {article.author}</span>
               <span className="votes">Votes: {article.votes}</span>
               <time dateTime={article.created_at}>
-                Published at: {new Date(article.created_at).toLocaleDateString()}
+                Published at:{" "}
+                {new Date(article.created_at).toLocaleDateString()}
               </time>
             </footer>
           </article>
         )}
       </section>
-      <Comment articleId={articleId} />
+      <UserProvider>
+        <Comment articleId={articleId} />
+      </UserProvider>
     </>
   );
 }

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import Error from "../Error/Error.jsx";
 import styles from "./CommentForm.module.css";
+import { useUser } from "../../hooks/useUser.js";
 
 function CommentForm({ articleId, fetchComments }) {
   const [comment, setComment] = useState("");
   const [isPosting, setIsPosting] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const { user } = useUser();
 
   function handleChange({ target }) {
     setComment(target.value);
@@ -23,8 +26,7 @@ function CommentForm({ articleId, fetchComments }) {
           headers: {
             "Content-Type": "application/json",
           },
-          // TODO: replace with current logged in user
-          body: JSON.stringify({ username: "cooljmessy", body: comment }),
+          body: JSON.stringify({ username: user.username, body: comment }),
         }
       );
 
