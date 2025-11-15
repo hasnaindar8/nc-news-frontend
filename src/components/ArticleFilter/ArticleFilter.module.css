@@ -1,0 +1,48 @@
+.articleFilter {
+  border: 1px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: white;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.articleFilter button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0;
+}
+
+.articleFilter button span:last-child {
+  transition: transform 0.2s ease;
+}
+
+.articleFilter label {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.articleFilter select {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: white;
+  outline: none;
+}
+
+.articleFilter select:focus {
+  border-color: var(--color-primary);
+}

@@ -3,20 +3,29 @@ import ArticleCard from "../ArticleCard/ArticleCard.jsx";
 import styles from "./ArticleList.module.css";
 import Loading from "../Loading/Loading.jsx";
 import Error from "../Error/Error.jsx";
+import ArticleFilter from "../ArticleFilter/ArticleFilter.jsx";
+import { useSearchParams } from "react-router";
 
 function ArticleList(props) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [sortBy, setSortBy] = useState(
+    searchParams.get("sort_by") || "created_at"
+  );
+  const [order, setOrder] = useState(searchParams.get("order") || "desc");
+
   const { topic } = props;
 
   async function fetchArticles() {
     try {
       let url = "https://nc-news-backend-02ex.onrender.com/api/articles";
 
-      if (topic) {
-        url += `?topic=${topic}`;
-      }
+      url += topic
+        ? `?topic=${topic}&sort_by=${sortBy}&order=${order}`
+        : `?sort_by=${sortBy}&order=${order}`;
+
       const response = await fetch(url);
       const data = await response.json();
       setArticles(data.articles);
@@ -30,7 +39,7 @@ function ArticleList(props) {
 
   useEffect(() => {
     fetchArticles();
-  }, [props]);
+  }, [props, sortBy, order]);
 
   if (isLoading) {
     return <Loading>Loading...</Loading>;
@@ -41,12 +50,22 @@ function ArticleList(props) {
   }
 
   return (
-    <section className={styles.grid}>
-      {articles &&
-        articles.map((article) => (
-          <ArticleCard key={article.article_id} article={article} />
-        ))}
-    </section>
+    <>
+      <ArticleFilter
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        order={order}
+        setOrder={setOrder}
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+      />
+      <section className={styles.grid}>
+        {articles &&
+          articles.map((article) => (
+            <ArticleCard key={article.article_id} article={article} />
+          ))}
+      </section>
+    </>
   );
 }
 export default ArticleList;
