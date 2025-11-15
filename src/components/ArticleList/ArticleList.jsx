@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ArticleCard from "../ArticleCard/ArticleCard.jsx";
 import styles from "./ArticleList.module.css";
 import Loading from "../Loading/Loading.jsx";
-import Error from "../ErrorMessage/ErrorMessage.jsx";
+import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import ArticleFilter from "../ArticleFilter/ArticleFilter.jsx";
 import { useSearchParams } from "react-router";
 
@@ -46,7 +46,7 @@ function ArticleList(props) {
   }
 
   if (isError) {
-    return <Error>Something went wrong</Error>;
+    return <ErrorMessage>Something went wrong</ErrorMessage>;
   }
 
   return (

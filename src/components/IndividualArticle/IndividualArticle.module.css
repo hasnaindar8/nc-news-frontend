@@ -56,12 +56,3 @@
   gap: 0.5rem;
   font-weight: 600;
 }
-
-.articleFooter button {
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  padding: 0.5rem;
-  color: var(--color-primary);
-  cursor: pointer;
-}

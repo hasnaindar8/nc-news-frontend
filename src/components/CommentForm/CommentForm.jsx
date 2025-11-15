@@ -32,7 +32,7 @@ function CommentForm({ articleId, fetchComments }) {
 
       const data = await response.json();
       if (data.msg) {
-        throw new ErrorMessage(data.msg);
+        throw new Error(data.msg);
       }
       fetchComments();
     } catch (error) {

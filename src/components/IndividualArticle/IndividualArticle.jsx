@@ -1,10 +1,10 @@
-import { BiUpvote, BiDownvote } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import styles from "./IndividualArticle.module.css";
 import Loading from "../Loading/Loading.jsx";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import Comment from "../Comment/Comment.jsx";
 import { UserProvider } from "../../contexts/UserContext.jsx";
+import VoteControls from "../VoteControls/VoteControls.jsx";
 
 function IndividualArticle({ articleId }) {
   const [article, setArticle] = useState(null);
@@ -30,28 +30,6 @@ function IndividualArticle({ articleId }) {
   useEffect(() => {
     fetchArticle();
   }, []);
-
-  const handleClick = async (isUp) => {
-    const incVote = isUp ? 1 : -1;
-    setVotes((prev) => prev + incVote);
-    try {
-      const url = `https://nc-news-backend-02ex.onrender.com/api/articles/${articleId}`;
-      const response = await fetch(url, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ inc_votes: incVote }),
-      });
-
-      const data = await response.json();
-      if (data.msg) {
-        throw new Error(data.msg);
-      }
-      setVotes(data.article.votes);
-    } catch (error) {
-      console.log(error.message);
-      setVotes((prev) => prev - incVote);
-    }
-  };
 
   if (isLoading) {
     return <Loading>Loading...</Loading>;
@@ -80,23 +58,11 @@ function IndividualArticle({ articleId }) {
             <p className={styles.articleBody}>{article.body}</p>
             <footer className={styles.articleFooter}>
               <span>Author: {article.author}</span>
-              <span>
-                <button
-                  onClick={() => {
-                    handleClick(true);
-                  }}
-                >
-                  <BiUpvote />
-                </button>
-                <span className="votes">{votes} votes</span>
-                <button
-                  onClick={() => {
-                    handleClick(false);
-                  }}
-                >
-                  <BiDownvote />
-                </button>
-              </span>
+              <VoteControls
+                articleId={articleId}
+                votes={votes}
+                setVotes={setVotes}
+              />
               <time dateTime={article.created_at}>
                 Published at:{" "}
                 {new Date(article.created_at).toLocaleDateString()}
