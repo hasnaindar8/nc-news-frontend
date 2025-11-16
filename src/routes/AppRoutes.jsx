@@ -3,6 +3,7 @@ import Layout from "../components/Layout/Layout.jsx";
 import Home from "../components/pages/Home.jsx";
 import Article from "../components/pages/Article.jsx";
 import Topic from "../components/pages/Topic.jsx";
+import NotFound from "../components/NotFound/NotFound.jsx";
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
         <Route path="articles/:article_id" element={<Article />} />
         <Route path="topics/:topic" element={<Topic />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

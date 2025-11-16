@@ -1,0 +1,21 @@
+.notFound {
+  display: grid;
+  text-align: center;
+  padding: 3rem 1rem;
+  max-width: 600px;
+  margin: auto;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.notFound h2 {
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.notFound a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  padding-top: 0.5rem;
+}
