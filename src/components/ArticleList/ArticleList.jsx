@@ -9,7 +9,7 @@ import { useSearchParams } from "react-router";
 function ArticleList(props) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortBy, setSortBy] = useState(
     searchParams.get("sort_by") || "created_at"
@@ -28,10 +28,13 @@ function ArticleList(props) {
 
       const response = await fetch(url);
       const data = await response.json();
+      if (data.msg) {
+        throw new Error(data.msg);
+      }
       setArticles(data.articles);
-    } catch (error) {
-      console.log(error);
-      setIsError(true);
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
@@ -45,8 +48,8 @@ function ArticleList(props) {
     return <Loading>Loading...</Loading>;
   }
 
-  if (isError) {
-    return <ErrorMessage>Something went wrong</ErrorMessage>;
+  if (error) {
+    return <ErrorMessage>{error}</ErrorMessage>;
   }
 
   return (

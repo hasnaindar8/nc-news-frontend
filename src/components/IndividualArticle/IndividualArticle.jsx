@@ -10,18 +10,21 @@ function IndividualArticle({ articleId }) {
   const [article, setArticle] = useState(null);
   const [votes, setVotes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState(null);
 
   async function fetchArticle() {
     try {
       const url = `https://nc-news-backend-02ex.onrender.com/api/articles/${articleId}`;
       const response = await fetch(url);
       const data = await response.json();
+      if (data.msg) {
+        throw new Error(data.msg);
+      }
       setArticle(data.article);
       setVotes(data.article.votes);
-    } catch (error) {
-      console.log(error);
-      setIsError(true);
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
@@ -35,8 +38,8 @@ function IndividualArticle({ articleId }) {
     return <Loading>Loading...</Loading>;
   }
 
-  if (isError) {
-    return <ErrorMessage>Something went wrong</ErrorMessage>;
+  if (error) {
+    return <ErrorMessage>{error}</ErrorMessage>;
   }
 
   return (
