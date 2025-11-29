@@ -50,6 +50,18 @@ function IndividualArticle({ articleId }) {
             <header className={styles.articleHeader}>
               <h2 className={styles.title}>{article.title}</h2>
               <p className={styles.topic}>{article.topic}</p>
+              <address className={styles.author}>By {article.author}</address>
+              <time dateTime={article.created_at}>
+                {new Date(article.created_at).toLocaleString("en-GB", {
+                  weekday: "short",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                })}
+              </time>
             </header>
             <figure className={styles.figure}>
               <img
@@ -60,16 +72,11 @@ function IndividualArticle({ articleId }) {
             </figure>
             <p className={styles.articleBody}>{article.body}</p>
             <footer className={styles.articleFooter}>
-              <span>Author: {article.author}</span>
               <VoteControls
                 articleId={articleId}
                 votes={votes}
                 setVotes={setVotes}
               />
-              <time dateTime={article.created_at}>
-                Published at:{" "}
-                {new Date(article.created_at).toLocaleDateString()}
-              </time>
             </footer>
           </article>
         )}
