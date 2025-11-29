@@ -12,3 +12,12 @@
   font-size: 0.875rem;
   color: var(--color-bg);
 }
+
+.link {
+  color: var(--color-bg);
+}
+
+.link:hover {
+  color: var(--color-bg);
+  font-weight: 500;
+}

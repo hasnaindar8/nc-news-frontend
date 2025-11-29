@@ -1,7 +1,8 @@
 .nav {
   display: flex;
+  flex-direction: row;
   gap: 1.5rem;
- padding-top: 1.5rem;
+  padding-top: 1.5rem;
 }
 
 .link {

@@ -6,7 +6,9 @@ function Header() {
   return (
     <header className={styles.header}>
       <Link to="/" className={styles.link}>
-        <h1>NC News</h1>
+        <h1>
+          <strong>NC</strong> News
+        </h1>
       </Link>
       <NavBar />
     </header>
