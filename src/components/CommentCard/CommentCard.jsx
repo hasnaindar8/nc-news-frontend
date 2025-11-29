@@ -44,10 +44,14 @@ function CommentCard({ comment, fetchComments, user }) {
       <footer className={styles.commentFooter}>
         <span className={styles.commentVotes}>Votes: {votes}</span>
         <time className={styles.commentTime} dateTime={date.toISOString()}>
-          {date.toLocaleDateString("en-GB")}{" "}
-          {date.toLocaleTimeString("en-GB", {
-            hour: "2-digit",
-            minute: "2-digit",
+          {date.toLocaleString("en-GB", {
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
           })}
         </time>
       </footer>
