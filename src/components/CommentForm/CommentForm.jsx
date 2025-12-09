@@ -1,14 +1,14 @@
 import { useState } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage.jsx";
 import styles from "./CommentForm.module.css";
-import { useUser } from "../../hooks/useUser.js";
+import useUser from "../../hooks/useUser.js";
 
 function CommentForm({ articleId, fetchComments }) {
   const [comment, setComment] = useState("");
   const [isPosting, setIsPosting] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const { user } = useUser();
+  const { authUser } = useUser();
 
   function handleChange({ target }) {
     setComment(target.value);
@@ -26,7 +26,7 @@ function CommentForm({ articleId, fetchComments }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username: user.username, body: comment }),
+          body: JSON.stringify({ username: authUser.username, body: comment }),
         }
       );
 

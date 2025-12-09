@@ -81,9 +81,7 @@ function IndividualArticle({ articleId }) {
           </article>
         )}
       </section>
-      <UserProvider>
-        <Comment articleId={articleId} />
-      </UserProvider>
+      <Comment articleId={articleId} />
     </>
   );
 }

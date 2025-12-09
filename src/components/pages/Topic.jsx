@@ -3,10 +3,6 @@ import ArticleList from "../ArticleList/ArticleList.jsx";
 
 function Topic() {
   const { topic } = useParams();
-  return (
-    <>
-      <ArticleList topic={topic} />
-    </>
-  );
+  return <ArticleList topic={topic} />;
 }
 export default Topic;

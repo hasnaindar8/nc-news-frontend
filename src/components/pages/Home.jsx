@@ -1,9 +1,5 @@
 import ArticleList from "../ArticleList/ArticleList.jsx";
 function Home() {
-  return (
-    <>
-      <ArticleList />
-    </>
-  );
+  return <ArticleList />;
 }
 export default Home;
